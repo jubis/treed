@@ -62,4 +62,7 @@ public void draw() {
   physics.update();
   // default display of every shape
   physics.display();
+  
+ // Calculator.valueOfFunction(2);
+ //Calculator.derivativeOfFunction(2,0.000000001);
 }
