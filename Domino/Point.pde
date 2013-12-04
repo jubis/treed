@@ -22,6 +22,10 @@ class Point {
     return new Point(this.x+p.x, this.y+p.y);
   }
   
+  public Point minus(Point p) {
+   return new Point(this.x-p.x, this.y-p.y);
+  }
+  
   public Point times(float t) {
     return new Point(this.x*t, this.y*t);
   }

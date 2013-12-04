@@ -4,7 +4,7 @@ import bRigid.*;
 
 PeasyCam cam;
 BPhysics physics;
-Adder a;
+Adder adder;
 
 public void setup() {
   size(1280, 720, P3D);
@@ -22,7 +22,7 @@ public void setup() {
   //set gravity
   physics.world.setGravity(new Vector3f(0, 500, 0));
   
-  a = new Adder(this,physics);
+  adder = new Adder(this,physics);
   
   //a.add(new Point(0, 0), 0);
   
@@ -30,8 +30,11 @@ public void setup() {
              0,
              200,
              PI,
-             a);
-             
+             adder);
+  drawLine(new Point(10, 10), new Point(310, 310));   
+  drawLine(new Point(310, 310), new Point(610, 310));
+  drawLine(new Point(610, 310), new Point(800, 100)); 
+  drawLine(new Point(800, 100), new Point(910, 100)); 
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
   println((new Point(10,10)).unit().length());
@@ -81,5 +84,27 @@ public void draw() {
   physics.update();
   // default display of every shape
   physics.display();
+}
+
+public void drawLine(Point begin, Point end){
+  Point line = end.minus(begin);
+  //30 on välin pituus
+  int boxAmount = (int)line.length()/40;
+  //times on kertolasku
+  Point offset = line.times(1f/boxAmount);
+  float angle = atan(line.y/line.x);
+  println("Kulma "+angle);
+  Point location = begin;
+  for(int i=0; i<boxAmount; i++){
+    //a = adder
+    adder.add(location, PI/2-angle);
+    location = location.plus(offset);
+    println("for-looppi "+i+ " boxAmount "+ boxAmount);
+  }
+}
+
+public void drawSteps(){
+  
+  
 }
 
