@@ -1,6 +1,7 @@
 import javax.vecmath.Vector3f;
 import peasy.*;
 import bRigid.*;
+import java.util.ArrayList;
 
 PeasyCam cam;
 BPhysics physics;
@@ -25,32 +26,15 @@ public void setup() {
   adder = new Adder(this,physics);
   
   //a.add(new Point(0, 0), 0);
-
-  
-  new Circle(new Point(0, 0), 
-             0,
-             200,
-             PI,
-             adder);
- // drawLine(new Point(10, 10), new Point(310, 310));   
-  drawLine(new Point(310, 310), new Point(610, 310));
-  drawLine(new Point(610, 310), new Point(800, 100)); 
-  drawLine(new Point(800, 100), new Point(910, 100)); 
-  
-  drawSteps(new Point(10, 10), new Point(310, 310));
-
-             
-
+  drawSteps(new Point(0, 200), new Point(-300, 0));
+   
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
   println((new Point(10,10)).unit().length());
   println((new Point(10,10)).times(5));*/
-  println(new Point(PI).toString() + "################");
-             
-  drawLine(new Point(0, 200), new Point(310, 315));   
-  drawLine(new Point(310, 310), new Point(615, 319));
-  drawLine(new Point(610, 310), new Point(800, 80)); 
-  drawLine(new Point(800, 100), new Point(1010, 100)); 
+  //println(new Point(PI).toString() + "################");
+          
+  drawLine(new Point(0, 200), new Point(1050, 100));
   
   new Circle(new Point(970, 100), 
              0,
@@ -72,7 +56,7 @@ public void setup() {
              PI*1.5,
              adder,
              false);
-             
+            
    //adder.add(new Point(0, 200), 0);
 }
 
@@ -146,26 +130,30 @@ public void drawSteps(Point begin, Point end){
   println("Kulma "+angle);
   Point location = begin;
   float y = 240;
+  int boxHeight = 20;
+  
   for(int i=0; i<boxAmount; i++){
     //a = adder
-    //adder.add(location, PI/2-angle);
+    
     location = location.plus(offset);
+    adder.add(location, y-40, PI/2-angle);
     //location, y, BObject, rotation
     //adder.add(location, y, new BBox(this, 200, 40, 40, 40), 0);
     
    for(int j=0; j<=i; j++){
      //if(y<=220){
       //int j=i; 
-       adder.add(location, y+j*40, new BBox(this, 10, 39, 39, 39), PI/2-angle);
+       //adder.add(location, y+j*40, , PI/2-angle);
+       BBox box = new BBox(this, 50, new Vector3f(location.x, y+j*boxHeight, location.y), new Vector3f(40, boxHeight, 40), false);
+       box.setRotation(new Vector3f(0,1,0), PI/2-angle);
+       physics.addBody(box);
+       //box.setMass(0);
+       //println(box.);
      //}
      
    } 
-   y = y - 40;
+   y = y - boxHeight;
   }
-  
-}
-
-public void drawTower(int boxes){
   
 }
 
