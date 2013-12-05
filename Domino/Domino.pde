@@ -31,10 +31,12 @@ public void setup() {
              200,
              PI,
              adder);
-  drawLine(new Point(10, 10), new Point(310, 310));   
+ // drawLine(new Point(10, 10), new Point(310, 310));   
   drawLine(new Point(310, 310), new Point(610, 310));
   drawLine(new Point(610, 310), new Point(800, 100)); 
   drawLine(new Point(800, 100), new Point(910, 100)); 
+  
+  drawSteps(new Point(10, 10), new Point(310, 310));
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
   println((new Point(10,10)).unit().length());
@@ -102,8 +104,8 @@ public void drawLine(Point begin, Point end){
     println("for-looppi "+i+ " boxAmount "+ boxAmount);
   }
 }
-/*
-public void drawSteps(){
+
+public void drawSteps(Point begin, Point end){
  Point line = end.minus(begin);
   //30 on välin pituus
   int boxAmount = (int)line.length()/40;
@@ -112,12 +114,27 @@ public void drawSteps(){
   float angle = atan(line.y/line.x);
   println("Kulma "+angle);
   Point location = begin;
+  float y = 240;
   for(int i=0; i<boxAmount; i++){
     //a = adder
-    adder.add(location, PI/2-angle);
+    //adder.add(location, PI/2-angle);
     location = location.plus(offset);
-    println("for-looppi "+i+ " boxAmount "+ boxAmount);
+    //location, y, BObject, rotation
+    //adder.add(location, y, new BBox(this, 200, 40, 40, 40), 0);
+    
+   for(int j=0; j<=i; j++){
+     //if(y<=220){
+      //int j=i; 
+       adder.add(location, y+j*40, new BBox(this, 10, 39, 39, 39), PI/2-angle);
+     //}
+     
+   } 
+   y = y - 40;
   }
   
 }
-*/
+
+public void drawTower(int boxes){
+  
+}
+
