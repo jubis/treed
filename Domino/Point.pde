@@ -5,6 +5,8 @@ class Point {
   }
   
   public Point(float angle) {
+    this.x = cos(angle);
+    this.y = sin(angle);
   }
   
   public float x;

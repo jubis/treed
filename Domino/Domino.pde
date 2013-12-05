@@ -12,7 +12,7 @@ public void setup() {
 
   cam = new PeasyCam(this, 1000);
   cam.rotateY(-PI/2);
-  cam.lookAt(0, 0, 500);
+  cam.lookAt(500, 0, 100);
   //extends of physics world
   Vector3f min = new Vector3f(-2000, -1000, -2000);
   Vector3f max = new Vector3f(2000, 250, 20000); 
@@ -25,6 +25,7 @@ public void setup() {
   adder = new Adder(this,physics);
   
   //a.add(new Point(0, 0), 0);
+
   
   new Circle(new Point(0, 0), 
              0,
@@ -37,17 +38,47 @@ public void setup() {
   drawLine(new Point(800, 100), new Point(910, 100)); 
   
   drawSteps(new Point(10, 10), new Point(310, 310));
+
+             
+
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
   println((new Point(10,10)).unit().length());
   println((new Point(10,10)).times(5));*/
+  println(new Point(PI).toString() + "################");
+             
+  drawLine(new Point(0, 200), new Point(310, 315));   
+  drawLine(new Point(310, 310), new Point(615, 319));
+  drawLine(new Point(610, 310), new Point(800, 80)); 
+  drawLine(new Point(800, 100), new Point(1010, 100)); 
+  
+  new Circle(new Point(970, 100), 
+             0,
+             250,
+             PI,
+             adder,
+             true);
+     
+   new Circle(new Point(970, 350), 
+             -PI,
+             220,
+             PI,
+             adder,
+             false);
+          
+   new Circle(new Point(970, 570), 
+             0,
+             1000,
+             PI*1.5,
+             adder,
+             false);
+             
+   //adder.add(new Point(0, 200), 0);
 }
 
 public void draw() {
   background(255);
   lights();
-
-
 
   /*//cam.rotateY(frameCount*.01f);
    //cam.lookAt(0,0,500+frameCount*2);
@@ -91,17 +122,17 @@ public void draw() {
 public void drawLine(Point begin, Point end){
   Point line = end.minus(begin);
   //30 on välin pituus
-  int boxAmount = (int)line.length()/40;
+  int boxAmount = (int)line.length()/45;
   //times on kertolasku
   Point offset = line.times(1f/boxAmount);
   float angle = atan(line.y/line.x);
-  println("Kulma "+angle);
+  //println("Kulma "+angle);
   Point location = begin;
   for(int i=0; i<boxAmount; i++){
     //a = adder
     adder.add(location, PI/2-angle);
     location = location.plus(offset);
-    println("for-looppi "+i+ " boxAmount "+ boxAmount);
+    //println("for-looppi "+i+ " boxAmount "+ boxAmount);
   }
 }
 
