@@ -120,9 +120,22 @@ public void drawLine(Point begin, Point end){
     //println("for-looppi "+i+ " boxAmount "+ boxAmount);
   }
 }
-
+/*
 public void drawSteps(){
-  
+ Point line = end.minus(begin);
+  //30 on välin pituus
+  int boxAmount = (int)line.length()/40;
+  //times on kertolasku
+  Point offset = line.times(1f/boxAmount);
+  float angle = atan(line.y/line.x);
+  println("Kulma "+angle);
+  Point location = begin;
+  for(int i=0; i<boxAmount; i++){
+    //a = adder
+    adder.add(location, PI/2-angle);
+    location = location.plus(offset);
+    println("for-looppi "+i+ " boxAmount "+ boxAmount);
+  }
   
 }
-
+*/
