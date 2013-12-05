@@ -14,7 +14,7 @@ class Adder {
   
   public void add(Point posFlat, float rotation) {
     Vector3f pos = new Vector3f(posFlat.x, 220, posFlat.y);
-    BObject b = new BObject(this.app, 100, new BBox(this.app, 1, 30, 60, 7), pos, true);
+    BObject b = new BObject(this.app, 100, new BBox(this.app, 1, 30, 60, 10), pos, true);
     b.setRotation(new Vector3f(0, 1, 0), rotation);
     physics.addBody(b);
   }
