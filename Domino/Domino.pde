@@ -26,7 +26,7 @@ public void setup() {
   adder = new Adder(this,physics);
   
   //a.add(new Point(0, 0), 0);
-  drawSteps(new Point(0, 200), new Point(-300, 0));
+  drawSteps(new Point(0, 200), new Point(-300, 0), adder.GREEN);
    
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
@@ -34,44 +34,52 @@ public void setup() {
   println((new Point(10,10)).times(5));*/
   //println(new Point(PI).toString() + "################");
           
-  drawLine(new Point(0, 200), new Point(1050, 100));
+  drawLine(new Point(0, 200), new Point(1050, 100), adder.RED);
   
   new Circle(new Point(970, 100), 
              0,
              250,
              PI,
              adder,
-             true);
+             true,
+             adder.BLUE);
      
    new Circle(new Point(970, 350), 
              -PI,
              220,
              PI,
              adder,
-             false);
+             false,
+             adder.BLUE);
           
    new Circle(new Point(970, 570), 
              0,
              1000,
              PI,
              adder,
-             false);
+             false,
+             adder.BLUE);
+
+          
       
    new Circle(new Point(1000, -430), 
              PI,
              1000,
              PI,
              adder,
-             true);
+             true,
+             adder.BLUE);
              
-    drawSteps(new Point(1000, -1430), new Point(1300, -1430));
+    drawSteps(new Point(1000, -1430), new Point(1300, -1430), adder.GREEN);
     
     new Circle(new Point(1310, -1430), 
              0,
              1000,
              PI,
              adder,
-             true);
+             true,
+             adder.BLUE);
+
             
    //adder.add(new Point(0, 200), 0);
 }
@@ -113,7 +121,9 @@ public void draw() {
    //add body to the physics engine
    physics.addBody(r);
    }*/
-  //update physics engine every frame
+  //update physics engine every frame, nopeutetaan dominoiden kaatumista
+  physics.update();
+  physics.update();
   physics.update();
   physics.update();
   physics.update();
@@ -121,7 +131,7 @@ public void draw() {
   physics.display();
 }
 
-public void drawLine(Point begin, Point end){
+public void drawLine(Point begin, Point end, Vector3f c){
   Point line = end.minus(begin);
   //30 on välin pituus
   int boxAmount = (int)line.length()/45;
@@ -132,13 +142,13 @@ public void drawLine(Point begin, Point end){
   Point location = begin;
   for(int i=0; i<boxAmount; i++){
     //a = adder
-    adder.add(location, PI/2-angle);
+    adder.add(location, PI/2-angle, c);
     location = location.plus(offset);
     //println("for-looppi "+i+ " boxAmount "+ boxAmount);
   }
 }
 
-public void drawSteps(Point begin, Point end){
+public void drawSteps(Point begin, Point end, Vector3f c){
  Point line = end.minus(begin);
   //30 on välin pituus
   int boxAmount = (int)line.length()/40;
@@ -154,7 +164,7 @@ public void drawSteps(Point begin, Point end){
     //a = adder
     
     location = location.plus(offset);
-    adder.add(location, y-40, PI/2-angle);
+    adder.add(location, y-40, PI/2-angle, c);
     //location, y, BObject, rotation
     //adder.add(location, y, new BBox(this, 200, 40, 40, 40), 0);
     
