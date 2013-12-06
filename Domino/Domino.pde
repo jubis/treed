@@ -15,8 +15,8 @@ public void setup() {
   cam.rotateY(-PI/2);
   cam.lookAt(500, 0, 100);
   //extends of physics world
-  Vector3f min = new Vector3f(-2000, -1000, -2000);
-  Vector3f max = new Vector3f(2000, 250, 20000); 
+  Vector3f min = new Vector3f(-5000, -1000, -5000);
+  Vector3f max = new Vector3f(5000, 250, 20000); 
   //create a rigid physics engine with a bounding box
   physics = new BPhysics(min, max);
   //physics = new BPhysics();
@@ -53,9 +53,25 @@ public void setup() {
    new Circle(new Point(970, 570), 
              0,
              1000,
-             PI*1.5,
+             PI,
              adder,
              false);
+      
+   new Circle(new Point(1000, -430), 
+             PI,
+             1000,
+             PI,
+             adder,
+             true);
+             
+    drawSteps(new Point(1000, -1430), new Point(1300, -1430));
+    
+    new Circle(new Point(1310, -1430), 
+             0,
+             1000,
+             PI,
+             adder,
+             true);
             
    //adder.add(new Point(0, 200), 0);
 }
