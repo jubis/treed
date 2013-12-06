@@ -28,7 +28,7 @@ class Adder {
     Vector3f pos = new Vector3f(location.x, y, location.y);
     BObject b = new BObject(this.app, 100, object, pos, true);
     b.setRotation(new Vector3f(0, 1, 0), rotation);
-    b.display(c);
+    b.display(c, new Vector3f(50,50,50));
     physics.addBody(b);
   }
   
