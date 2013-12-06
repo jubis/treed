@@ -4,12 +4,14 @@ class Circle {
   private float diameter;
   private float angle;
   private Point center;
+  private Vector3f c;
   
-  public Circle(Point start, float startDir, float diameter, float angle, Adder a, boolean right) {
+  public Circle(Point start, float startDir, float diameter, float angle, Adder a, boolean right, Vector3f c) {
     this.start = start;
     this.startDir = startDir;
     this. diameter = diameter;
     this.angle = angle;
+    this.c = c;
     Point fromStartToCenter = new Point(startDir).normal().times(this.diameter/2);
     if(!right) {
       fromStartToCenter = fromStartToCenter.times(-1);
@@ -35,7 +37,7 @@ class Circle {
       //println(fromCenterToArc.length());
       Point pos = this.center.plus(fromCenterToArc);
       //println(pos);
-      a.add(pos, PI/2+currentAngle);
+      a.add(pos, PI/2+currentAngle, c);
       currentAngle += this.angle/blocks;  
     }
     
