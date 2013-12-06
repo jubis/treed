@@ -115,6 +115,8 @@ public void draw() {
    }*/
   //update physics engine every frame
   physics.update();
+  physics.update();
+  physics.update();
   // default display of every shape
   physics.display();
 }
