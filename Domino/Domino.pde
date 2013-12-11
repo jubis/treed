@@ -125,8 +125,6 @@ public void draw() {
   physics.update();
   physics.update();
   physics.update();
-  physics.update();
-  physics.update();
   // default display of every shape
   physics.display();
 }
