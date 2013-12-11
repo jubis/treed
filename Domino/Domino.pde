@@ -6,7 +6,6 @@ import java.util.ArrayList;
 PeasyCam cam;
 BPhysics physics;
 Adder adder;
-CamMove move1;
 
 public void setup() {
   frameRate(20);
@@ -86,7 +85,6 @@ public void setup() {
             
    //adder.add(new Point(0, 200), 0);
    
-   move1 = new CamMove(cam, 100, new Point(100, 100), 200, new Point(1500, -1500));
 }
 
 public void draw() {
@@ -130,8 +128,7 @@ public void draw() {
   physics.update();
   physics.update();
   physics.update();
-  
-  move1.update();
+
   // default display of every shape
   physics.display();
   
