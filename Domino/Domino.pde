@@ -28,7 +28,7 @@ public void setup() {
   adder = new Adder(this,physics);
   
   //a.add(new Point(0, 0), 0);
-  drawSteps(new Point(0, 200), new Point(-300, 0), adder.GREEN);
+  drawSteps(new Point(0, 100), new Point(-500, 100), adder.GREEN);
    
   /*println((new Point(10,10)).normal().unit().times(5));
   println((new Point(10,10)).normal());
@@ -36,50 +36,90 @@ public void setup() {
   println((new Point(10,10)).times(5));*/
   //println(new Point(PI).toString() + "################");
           
-  drawLine(new Point(0, 200), new Point(1050, 100), adder.RED);
+  drawLine(new Point(0, 100), new Point(1050, 100), adder.RED);
   
   new Circle(new Point(970, 100), 
-             0,
+             PI,
              250,
+             PI,
+             adder,
+             false,
+             adder.BLUE);
+     
+   new Circle(new Point(970, 350), 
+             0,
+             220,
+             PI,
+             adder,
+             true,
+             adder.BLUE);
+          
+   new Circle(new Point(970, 570), 
+             PI,
+             1000,
+             PI,
+             adder,
+             true,
+             adder.BLUE);
+
+          
+      
+   new Circle(new Point(1010, -430), 
+             0,
+             1000,
+             PI,
+             adder,
+             false,
+             adder.GREEN);
+             
+    drawSteps(new Point(1000, -1430), new Point(1290, -1430), adder.GREEN);
+    
+    new Circle(new Point(1310, -1430), 
+             0,
+             1000,
+             PI/2,
+             adder,
+             true,
+             adder.BLUE);
+     
+     drawLine(new Point(1810, -950), new Point(1810, 460), adder.RED);
+     
+     new Circle(new Point(1810, 420), 
+             -PI/2,
+             1000,
+             PI/2,
+             adder,
+             false,
+             adder.BLUE);
+     
+     drawLine(new Point(1330, 920), new Point(810, 920), adder.GREEN);
+     
+     new Circle(new Point(810, 920), 
+             0,
+             1000,
              PI,
              adder,
              true,
              adder.BLUE);
      
-   new Circle(new Point(970, 350), 
-             -PI,
-             220,
+     new Circle(new Point(780, 1920), 
              PI,
-             adder,
-             false,
-             adder.BLUE);
-          
-   new Circle(new Point(970, 570), 
-             0,
              1000,
              PI,
              adder,
              false,
              adder.BLUE);
-
-          
-      
-   new Circle(new Point(1000, -430), 
-             PI,
-             1000,
-             PI,
-             adder,
-             true,
-             adder.GREEN);
              
-    drawSteps(new Point(1000, -1430), new Point(1300, -1430), adder.GREEN);
-    
-    new Circle(new Point(1310, -1430), 
+     drawSteps(new Point(780, 2920), new Point(280, 2920), adder.GREEN);
+     
+     drawLine(new Point(260, 2920), new Point(-400, 2920), adder.GREEN);
+     
+     new Circle(new Point(-360, 2920), 
              0,
              1000,
              PI,
              adder,
-             true,
+             false,
              adder.BLUE);
 
             
@@ -132,7 +172,7 @@ public void draw() {
   // default display of every shape
   physics.display();
   
-  println(frameCount);
+  /*println(frameCount);
   if(frameCount == 260) {
     cam.rotateY(PI/2);
     cam.lookAt(1200, 0, -800, 350, 6000);
@@ -140,7 +180,7 @@ public void draw() {
   if(frameCount == 500) {
     cam.rotateY(-PI/2);
     cam.lookAt(1100, 0, -800, 500, 3000);
-  }
+  }*/
 }
 
 public void drawLine(Point begin, Point end, Vector3f c){

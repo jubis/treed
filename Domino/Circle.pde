@@ -31,13 +31,13 @@ class Circle {
     int blocks = (int) perimeter / 45;
   
     float currentAngle = this.startDir;
-    
     for(int i = 0; i < blocks; i++) {
-      Point fromCenterToArc = new Point(cos(PI/2-currentAngle), sin(PI/2-currentAngle)).times(this.diameter/2);
+      float totalAngle = PI/2-currentAngle-this.angle;
+      Point fromCenterToArc = new Point(cos(totalAngle), sin(totalAngle)).times(this.diameter/2);
       //println(fromCenterToArc.length());
       Point pos = this.center.plus(fromCenterToArc);
       //println(pos);
-      a.add(pos, PI/2+currentAngle, c);
+      a.add(pos, -totalAngle, c);
       currentAngle += this.angle/blocks;  
     }
     
