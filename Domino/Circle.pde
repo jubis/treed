@@ -18,8 +18,8 @@ class Circle {
     }
     this.center = start.plus(fromStartToCenter);
 
-    println("center: " + this.center.toString());
-    println("start: " + this.start);
+    //println("center: " + this.center.toString());
+    //println("start: " + this.start);
     
     createBlocks(a);
   }
@@ -27,7 +27,7 @@ class Circle {
   private void createBlocks(Adder a) {
     float perimeter = 2*PI*this.diameter/2;
     perimeter = perimeter * (this.angle/(2*PI));
-    println("perimeter: " + perimeter);
+    //println("perimeter: " + perimeter);
     int blocks = (int) perimeter / 45;
   
     float currentAngle = this.startDir;

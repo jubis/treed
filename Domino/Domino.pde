@@ -6,8 +6,11 @@ import java.util.ArrayList;
 PeasyCam cam;
 BPhysics physics;
 Adder adder;
+CamMove move1;
 
 public void setup() {
+  frameRate(20);
+  
   size(1280, 720, P3D);
   frameRate(60);
 
@@ -68,7 +71,7 @@ public void setup() {
              PI,
              adder,
              true,
-             adder.BLUE);
+             adder.GREEN);
              
     drawSteps(new Point(1000, -1430), new Point(1300, -1430), adder.GREEN);
     
@@ -82,6 +85,8 @@ public void setup() {
 
             
    //adder.add(new Point(0, 200), 0);
+   
+   move1 = new CamMove(cam, 100, new Point(100, 100), 200, new Point(1500, -1500));
 }
 
 public void draw() {
@@ -125,10 +130,20 @@ public void draw() {
   physics.update();
   physics.update();
   physics.update();
-  physics.update();
-  physics.update();
+  
+  move1.update();
   // default display of every shape
   physics.display();
+  
+  println(frameCount);
+  if(frameCount == 260) {
+    cam.rotateY(PI/2);
+    cam.lookAt(1200, 0, -800, 350, 6000);
+  }
+  if(frameCount == 500) {
+    cam.rotateY(-PI/2);
+    cam.lookAt(1100, 0, -800, 500, 3000);
+  }
 }
 
 public void drawLine(Point begin, Point end, Vector3f c){
