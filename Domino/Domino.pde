@@ -6,9 +6,11 @@ import java.util.ArrayList;
 PeasyCam cam;
 BPhysics physics;
 Adder adder;
+PImage woodenFloor;
 
 public void setup() {
   frameRate(20);
+  woodenFloor = loadImage("parketti.png");
   
   size(1280, 720, P3D);
   frameRate(60);
@@ -89,8 +91,13 @@ public void setup() {
 
 public void draw() {
   background(255);
-  lights();
-
+  
+  //lights();
+  ambientLight(100,100,100);
+  directionalLight(200, 200, 200, 0.95, 1, 0.45);
+  
+  drawFloor();
+  
   /*//cam.rotateY(frameCount*.01f);
    //cam.lookAt(0,0,500+frameCount*2);
    int mass = 100;
@@ -195,5 +202,16 @@ public void drawSteps(Point begin, Point end, Vector3f c){
    y = y - boxHeight;
   }
   
+}
+
+public void drawFloor(){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(woodenFloor);
+  vertex(-5000, 250, -5000, 0, 0);
+  vertex(5000, 250, -5000, 1024, 0);
+  vertex(5000, 250, 20000, 1024, 1024);
+  vertex(-5000, 250, 20000, 0, 1024);
+  endShape();
 }
 
