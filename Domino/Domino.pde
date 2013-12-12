@@ -148,8 +148,8 @@ public void draw() {
   background(255);
   
   //lights();
-  ambientLight(100,100,100);
-  directionalLight(200, 200, 200, 0.95, 1, 0.45);
+  ambientLight(110,110,110);
+  directionalLight(200, 200, 200, 1, 1, 1);
   
   drawFloor();
   drawWalls();
