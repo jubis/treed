@@ -3,18 +3,33 @@ import peasy.*;
 import bRigid.*;
 import java.util.ArrayList;
 
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+Minim minim;
+AudioPlayer musicPlayer;
+
 PeasyCam cam;
 BPhysics physics;
 Adder adder;
 PImage woodenFloor;
+PImage woodenWall;
 
 public void setup() {
   frameRate(20);
   woodenFloor = loadImage("parketti.png");
+  woodenWall = loadImage("seinä.png"); 
   
   size(1280, 720, P3D);
   frameRate(60);
-
+  
+  this.minim = new Minim(this) ;
+  this.musicPlayer = minim.loadFile("Everlasting.wav");
+  this.musicPlayer.play();
+  
   cam = new PeasyCam(this, 1000);
   cam.rotateY(-PI/2);
   cam.lookAt(500, 0, 100);
@@ -137,7 +152,7 @@ public void draw() {
   directionalLight(200, 200, 200, 0.95, 1, 0.45);
   
   drawFloor();
-  
+  drawWalls();
   /*//cam.rotateY(frameCount*.01f);
    //cam.lookAt(0,0,500+frameCount*2);
    int mass = 100;
@@ -175,7 +190,7 @@ public void draw() {
   physics.update();
   physics.update();
   physics.update();
-
+ physics.update();
   // default display of every shape
   physics.display();
   
@@ -254,4 +269,40 @@ public void drawFloor(){
   vertex(-5000, 250, 20000, 0, 1024);
   endShape();
 }
+
+public void drawWalls(){
+  /*beginShape();
+  //vertex(x, y, z, u, v)
+  texture(woodenWall);
+  vertex(-5000, 250, -5000, 0, 0);
+  vertex(5000, 250, -5000, 0, 634);
+  vertex(5000, -3000, -5000, 800, 634);
+  vertex(-5000, -3000, -5000, 800, 0);
+  endShape();
+  
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(woodenWall);
+  vertex(-3000, 250, -3000, 0, 0);
+  vertex(-3000, 250, 2000, 0, 634);
+  vertex(-3000, -3000, 2000, 800, 634);
+  vertex(-3000, -3000, -3000,800, 0);
+  endShape();*/
+  
+  drawXWall(-4000, 4000, 250, -3000, -4000);
+  
+  
+}
+
+public void drawXWall(int x1, int x2, int y1, int y2, int z){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(woodenWall);
+  vertex(x1, y1, z, 0, 0);
+  vertex(x2, y1, z, 0, 634);
+  vertex(x2, y2, z, 800, 634);
+  vertex(x1, y2, z, 800, 0);
+  endShape();
+}
+
 
