@@ -153,6 +153,7 @@ public void draw() {
   
   drawFloor();
   drawWalls();
+  drawRoof();
   /*//cam.rotateY(frameCount*.01f);
    //cam.lookAt(0,0,500+frameCount*2);
    int mass = 100;
@@ -271,27 +272,10 @@ public void drawFloor(){
 }
 
 public void drawWalls(){
-  /*beginShape();
-  //vertex(x, y, z, u, v)
-  texture(woodenWall);
-  vertex(-5000, 250, -5000, 0, 0);
-  vertex(5000, 250, -5000, 0, 634);
-  vertex(5000, -3000, -5000, 800, 634);
-  vertex(-5000, -3000, -5000, 800, 0);
-  endShape();
-  
-  beginShape();
-  //vertex(x, y, z, u, v)
-  texture(woodenWall);
-  vertex(-3000, 250, -3000, 0, 0);
-  vertex(-3000, 250, 2000, 0, 634);
-  vertex(-3000, -3000, 2000, 800, 634);
-  vertex(-3000, -3000, -3000,800, 0);
-  endShape();*/
-  
   drawXWall(-4000, 4000, 250, -3000, -4000);
-  
-  
+  drawZWall(-4000, 4000, 250, -3000, -4000);
+  drawZWall(-4000, 4000, 250, -3000, 4000);
+  drawXWall(-4000, 4000, 250, -3000, 4000); 
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
@@ -305,4 +289,25 @@ public void drawXWall(int x1, int x2, int y1, int y2, int z){
   endShape();
 }
 
+public void drawZWall(int z1, int z2, int y1, int y2, int x){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(woodenWall);
+  vertex(x, y1, z1, 0, 0);
+  vertex(x, y1, z2, 0, 634);
+  vertex(x, y2, z2, 800, 634);
+  vertex(x, y2, z1, 800, 0);
+  endShape();
+}
+
+public void drawRoof(){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  //texture(woodenWall);
+  vertex(-4000, -3000, -4000);
+  vertex(4000, -3000, -4000);
+  vertex(4000, -3000, 4000);
+  vertex(-4000, -3000, 4000);
+  endShape();
+}
 
