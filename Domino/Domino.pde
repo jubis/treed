@@ -19,7 +19,7 @@ PImage woodenFloor;
 PImage woodenWall;
 PImage window;
 PImage door;
-
+PImage startImg;
 
 //Attribuutti kertoo, onko ohjelma käynnissä vai ei
 boolean running = false;
@@ -30,6 +30,7 @@ public void setup() {
   woodenWall = loadImage("seinä.png"); 
   window = loadImage("ikkuna.png");
   door= loadImage("ovi.png");
+  startImg = loadImage("startimage.png");
   
   size(1280, 720, P3D);
   frameRate(60);
@@ -154,7 +155,7 @@ public void setup() {
 
 public void draw() {
   background(255);
-  
+  //drawStartScreen();
   //lights();
   ambientLight(110,110,110);
   directionalLight(200, 200, 200, 1, 1, 1);
@@ -204,6 +205,14 @@ public void draw() {
   // default display of every shape
   physics.display();
   
+  if(frameCount < 60) {
+    println(frameCount);
+    hint(DISABLE_DEPTH_TEST);
+    camera();
+    noLights();
+    image(startImg,0,0);
+    hint(ENABLE_DEPTH_TEST);
+  }
   /*println(frameCount);
   if(frameCount == 260) {
     cam.rotateY(PI/2);
@@ -365,20 +374,27 @@ public void drawXDoor(int x1, int x2, int y1, int y2, int z){
   endShape();
 }
 
-public void keyPressed(){
-  if(keyPressed=='p'){
+/*
+public void keyPressed(p){
+  //if(keyPressed=='p'){
     this.reset();
-  }
-}
+  //}
+}*/
 
 
 public void reset(){
   this.setup();
 }
 
-public void drawStartScreen(){
+/*public void drawStartScreen(){
+  if(keyPressed){
+    if(key == 'r'){
+      image(startImg,0,0);
+      reset();
+    }
+ }
   
-}
+}*/
 
 
 
