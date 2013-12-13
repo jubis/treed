@@ -165,7 +165,7 @@ public void draw() {
   drawFloor();
   drawWalls();
   drawRoof();
-  
+
   if(!running) {
     cam.beginHUD();
     noLights();
@@ -217,7 +217,6 @@ public void draw() {
         break;
     }
   }
-  
 }
 
 /**
@@ -282,20 +281,25 @@ public void drawFloor(){
 }
 
 public void drawWalls(){
+  //seinien piirto
   drawXWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, 4000);
   drawXWall(-4000, 4000, 250, -3000, 4000);
+  //z-suuntaiset ikkunat
   drawZWindow(-500, 500, -1000, -2000, -3999); 
   drawZWindow(-500, 500, -1000, -2000, 3999);
   drawZWindow(-2500, -1500, -1000, -2000, -3999); 
   drawZWindow(-2500, -1500, -1000, -2000, 3999);
   drawZWindow(1500, 2500, -1000, -2000, -3999); 
   drawZWindow(1500, 2500, -1000, -2000, 3999);
-  drawXWindow(-500, 500, -1000, -2000, -3999);
-  drawXWindow(-500, 500, -1000, -2000, 3999);
-  drawXDoor(-3000, -2000, -2250, 250, 3999);
-
+  //X-suuntaiset koordinaatit
+  drawXWindow(-1500, -500, -1000, -2000, -3999);
+  drawXWindow(1000, 2000, -1000, -2000, -3999);
+  
+  drawXWindow(1000, 2000, -1000, -2000, 3999);
+  drawXDoor(-1500, -500, -2000,250, 3999);
+  
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
