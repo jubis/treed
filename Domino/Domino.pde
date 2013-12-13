@@ -21,8 +21,8 @@ PImage window;
 PImage door;
 PImage startImg;
 
-//Attribuutti kertoo, onko ohjelma käynnissä vai ei
 boolean running = false;
+int frameCountOnStart = 0;
 
 public void setup() {
   frameRate(20);
@@ -37,30 +37,30 @@ public void setup() {
   
   this.minim = new Minim(this) ;
   this.musicPlayer = minim.loadFile("ameno.wav");
-  this.musicPlayer.play();
-  
+
   cam = new PeasyCam(this, 1000);
-  cam.rotateY(-PI/2);
-  cam.lookAt(500, 0, 100);
-  //extends of physics world
+  cam.rotateY(0);
+  cam.lookAt(970, 0, 570);
+  cam.setDistance(500);
+  
+  cam.setLeftDragHandler(null);
+  cam.setCenterDragHandler(null);
+  cam.setRightDragHandler(null);
+  cam.setWheelHandler(null);
+  
   Vector3f min = new Vector3f(-5000, -1000, -5000);
   Vector3f max = new Vector3f(5000, 250, 20000); 
-  //create a rigid physics engine with a bounding box
   physics = new BPhysics(min, max);
-  //physics = new BPhysics();
-  //set gravity
+
   physics.world.setGravity(new Vector3f(0, 500, 0));
   
-  adder = new Adder(this,physics);
-  
-  //a.add(new Point(0, 0), 0);
+  adder = new Adder(this, physics);   
+
+  initAnimation();
+}
+
+public void initAnimation() {
   drawSteps(new Point(0, 100), new Point(-500, 100), adder.GREEN);
-   
-  /*println((new Point(10,10)).normal().unit().times(5));
-  println((new Point(10,10)).normal());
-  println((new Point(10,10)).unit().length());
-  println((new Point(10,10)).times(5));*/
-  //println(new Point(PI).toString() + "################");
           
   drawLine(new Point(0, 100), new Point(1050, 100), adder.RED);
   
@@ -147,16 +147,18 @@ public void setup() {
              adder,
              false,
              adder.BLUE);
+}
 
-           
-   //adder.add(new Point(0, 200), 0);
-   
+public void keyPressed(){
+  if(!running) {
+    running = true;
+    frameCountOnStart = frameCount;
+    this.musicPlayer.play();
+  }
 }
 
 public void draw() {
   background(255);
-  //drawStartScreen();
-  //lights();
   ambientLight(110,110,110);
   directionalLight(200, 200, 200, 1, 1, 1);
   
@@ -164,85 +166,82 @@ public void draw() {
   drawWalls();
   drawRoof();
   
-  /*//cam.rotateY(frameCount*.01f);
-   //cam.lookAt(0,0,500+frameCount*2);
-   int mass = 100;
-   
-   if (frameCount % 5 == 0 && frameCount < 600) {
-   Vector3f pos = null;
-   //println(frameCount);
-   float x = (frameCount/1.5f-200)*3;
-   float y = x*x/100;
-   println(x);
-   if(x > -200 && x < 200) {
-   pos = new Vector3f(x*2, 220, y);
-   }
-   else if(x < -200) {
-   pos = new Vector3f(-200*2, 220, -400-x*4);
-   }
-   else {
-   println("curve ready");
-   pos = new Vector3f(-400, 220, 1200);
-   }
-   
-   //reuse the rigidBody of the sphere for performance resons
-   //BObject(PApplet p, float mass, BObject body, Vector3f center, boolean inertia)
-   BObject r = new BObject(this, mass, new BBox(this, 1, 30, 60, 7), pos, true);
-   if(x > -200 && x < 200) {
-   float angle = PI/2-atan(2*x/50f);
-   println("rotating: " + angle);
-   r.setRotation(new Vector3f(0,1,0), angle);
-   }
-   r.display(new Vector3f(200,200,200));
-   //add body to the physics engine
-   physics.addBody(r);
-   }*/
-  //update physics engine every frame, nopeutetaan dominoiden kaatumista
-  physics.update();
-  physics.update();
-  physics.update();
- physics.update();
-  // default display of every shape
-  physics.display();
-  
-  if(frameCount < 60) {
-    println(frameCount);
-    hint(DISABLE_DEPTH_TEST);
-    camera();
+  if(!running) {
+    cam.beginHUD();
     noLights();
     image(startImg,0,0);
-    hint(ENABLE_DEPTH_TEST);
+    cam.endHUD();
+  } else {
+    physics.update();
+    physics.update();
+    physics.update();
+    physics.update();
+    
+    physics.display();
+    
+    println(frameCount-frameCountOnStart);
+    switch(frameCount-frameCountOnStart) {
+      case 70: 
+        cam.lookAt(970, 0, 500, 1000, 3000); 
+        break;
+      case 150: 
+        cam.rotateY(-PI/2);
+        cam.lookAt(1200, 0, -800, 1300, 6000); 
+        break;
+      case 290: 
+        cam.lookAt(1200, 0, -800, 400, 10000); 
+        break;
+      case 450: 
+        cam.rotateY(-PI/2);
+        cam.lookAt(970, 0, 200, 300, 10500); 
+        break;
+      case 600:
+        cam.rotateY(PI/2); 
+        cam.lookAt(700, 0, 1500, 1000, 5000); 
+        break;
+      case 720:
+        cam.lookAt(700, 0, 2500, 1200, 5000); 
+        break;
+      case 930:
+        cam.rotateY(PI); 
+        cam.lookAt(-200, 0, 2500, 600, 5000); 
+        break;
+      case 1130:
+        cam.rotateY(-PI/3.6  );
+        cam.rotateX(PI/5.5);
+        cam.lookAt(1300, 0, 1500, 2500, 8000); 
+        this.musicPlayer.shiftGain(0, -40, 9000);
+        break;
+      case 1400:
+        this.musicPlayer.pause();
+        break;
+    }
   }
-  /*println(frameCount);
-  if(frameCount == 260) {
-    cam.rotateY(PI/2);
-    cam.lookAt(1200, 0, -800, 350, 6000);
-  }
-  if(frameCount == 500) {
-    cam.rotateY(-PI/2);
-    cam.lookAt(1100, 0, -800, 500, 3000);
-  }*/
   
 }
 
-public void drawLine(Point begin, Point end, Vector3f c){
+/**
+ * Piirtää haluttujen pisteiden väriin suoran jonon tietyn värisiä dominopalikoita.
+ */
+public void drawLine(Point begin, Point end, Vector3f blockColor){
   Point line = end.minus(begin);
-  //30 on välin pituus
+
   int boxAmount = (int)line.length()/45;
-  //times on kertolasku
+
   Point offset = line.times(1f/boxAmount);
   float angle = atan(line.y/line.x);
-  //println("Kulma "+angle);
+
   Point location = begin;
   for(int i=0; i<boxAmount; i++){
-    //a = adder
-    adder.add(location, PI/2-angle, c);
+    adder.add(location, PI/2-angle, blockColor);
     location = location.plus(offset);
-    //println("for-looppi "+i+ " boxAmount "+ boxAmount);
   }
 }
 
-public void drawSteps(Point begin, Point end, Vector3f c){
+/**
+ * Piirtää palikat kuten drawLine, mutta niiden alle tulee portaat, jotka nousevat pala palalta.
+ */
+public void drawSteps(Point begin, Point end, Vector3f blockColor){
  Point line = end.minus(begin);
   //30 on välin pituus
   int boxAmount = (int)line.length()/40;
@@ -255,33 +254,25 @@ public void drawSteps(Point begin, Point end, Vector3f c){
   int boxHeight = 20;
   
   for(int i=0; i<boxAmount; i++){
-    //a = adder
+     location = location.plus(offset);
+     adder.add(location, y-40, PI/2-angle, blockColor);
     
-    location = location.plus(offset);
-    adder.add(location, y-40, PI/2-angle, c);
-    //location, y, BObject, rotation
-    //adder.add(location, y, new BBox(this, 200, 40, 40, 40), 0);
-    
-   for(int j=0; j<=i; j++){
-     //if(y<=220){
-      //int j=i; 
-       //adder.add(location, y+j*40, , PI/2-angle);
+     for(int j=0; j<=i; j++){
        BBox box = new BBox(this, 50, new Vector3f(location.x, y+j*boxHeight, location.y), new Vector3f(40, boxHeight, 40), false);
        box.setRotation(new Vector3f(0,1,0), PI/2-angle);
        physics.addBody(box);
-       //box.setMass(0);
-       //println(box.);
-     //}
-     
-   } 
-   y = y - boxHeight;
+     } 
+     y = y - boxHeight;
   }
   
 }
 
+/****************
+ * Metodeja mökin osien piirtämiseen
+ ****************/
+
 public void drawFloor(){
   beginShape();
-  //vertex(x, y, z, u, v)
   texture(woodenFloor);
   vertex(-4000, 250, -4000, 0, 0);
   vertex(4000, 250, -4000, 1024, 0);
@@ -309,7 +300,6 @@ public void drawWalls(){
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
   beginShape();
-  //vertex(x, y, z, u, v)
   texture(woodenWall);
   vertex(x1, y1, z, 0, 0);
   vertex(x2, y1, z, 0, 634);
@@ -320,7 +310,6 @@ public void drawXWall(int x1, int x2, int y1, int y2, int z){
 
 public void drawZWall(int z1, int z2, int y1, int y2, int x){
   beginShape();
-  //vertex(x, y, z, u, v)
   texture(woodenWall);
   vertex(x, y1, z1, 0, 0);
   vertex(x, y1, z2, 0, 634);
@@ -331,8 +320,6 @@ public void drawZWall(int z1, int z2, int y1, int y2, int x){
 
 public void drawRoof(){
   beginShape();
-  //vertex(x, y, z, u, v)
-  //texture(woodenWall);
   vertex(-4000, -3000, -4000);
   vertex(4000, -3000, -4000);
   vertex(4000, -3000, 4000);
@@ -343,7 +330,6 @@ public void drawRoof(){
 
 public void drawZWindow(int z1, int z2, int y1, int y2, int x){
    beginShape();
-  //vertex(x, y, z, u, v)
   texture(window);
   vertex(x, y1, z1, 0, 0);
   vertex(x, y1, z2, 0, 1000);
@@ -354,7 +340,6 @@ public void drawZWindow(int z1, int z2, int y1, int y2, int x){
 
 public void drawXWindow(int x1, int x2, int y1, int y2, int z){
   beginShape();
-  //vertex(x, y, z, u, v)
   texture(window);
   vertex(x1, y1, z, 0, 0);
   vertex(x2, y1, z, 0, 1000);
@@ -365,7 +350,6 @@ public void drawXWindow(int x1, int x2, int y1, int y2, int z){
 
 public void drawXDoor(int x1, int x2, int y1, int y2, int z){
   beginShape();
-  //vertex(x, y, z, u, v)
   texture(door);
   vertex(x1, y1, z, 0, 0);
   vertex(x2, y1, z, 0, 1000);
@@ -373,28 +357,6 @@ public void drawXDoor(int x1, int x2, int y1, int y2, int z){
   vertex(x1, y2, z, 2000, 0);
   endShape();
 }
-
-/*
-public void keyPressed(p){
-  //if(keyPressed=='p'){
-    this.reset();
-  //}
-}*/
-
-
-public void reset(){
-  this.setup();
-}
-
-/*public void drawStartScreen(){
-  if(keyPressed){
-    if(key == 'r'){
-      image(startImg,0,0);
-      reset();
-    }
- }
-  
-}*/
 
 
 

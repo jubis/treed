@@ -1,6 +1,9 @@
 import javax.vecmath.Vector3f;
 import bRigid.*;
 
+/**
+ * Tarjoaa helpon rajapinnan dominopalioiden luomiseen.
+ */
 class Adder {
   private BObject block;
   private PApplet app;
@@ -12,7 +15,6 @@ class Adder {
   public Adder(PApplet app, BPhysics physics) {
     this.app = app;
     this.physics = physics;
-    //this.block = new BBox(this.app, 1, 30, 60, 7);
   }
   
   public void add(Point posFlat, float y, float rotation, Vector3f c) {

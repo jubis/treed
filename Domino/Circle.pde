@@ -1,3 +1,6 @@
+/**
+ * Piirtää dominopalikoista oikean kokoisen kaaren haluttuun paikkaan halutulla halkaisijalla.
+ */
 class Circle {
   private Point start;
   private float startDir;
@@ -17,9 +20,6 @@ class Circle {
       fromStartToCenter = fromStartToCenter.times(-1);
     }
     this.center = start.plus(fromStartToCenter);
-
-    //println("center: " + this.center.toString());
-    //println("start: " + this.start);
     
     createBlocks(a);
   }
@@ -27,16 +27,14 @@ class Circle {
   private void createBlocks(Adder a) {
     float perimeter = 2*PI*this.diameter/2;
     perimeter = perimeter * (this.angle/(2*PI));
-    //println("perimeter: " + perimeter);
     int blocks = (int) perimeter / 45;
   
     float currentAngle = this.startDir;
     for(int i = 0; i < blocks; i++) {
       float totalAngle = PI/2-currentAngle-this.angle;
       Point fromCenterToArc = new Point(cos(totalAngle), sin(totalAngle)).times(this.diameter/2);
-      //println(fromCenterToArc.length());
       Point pos = this.center.plus(fromCenterToArc);
-      //println(pos);
+      
       a.add(pos, -totalAngle, c);
       currentAngle += this.angle/blocks;  
     }

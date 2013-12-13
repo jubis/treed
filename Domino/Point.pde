@@ -1,3 +1,6 @@
+/**
+ * Apuluokka helpottamaan yksinkertaisia laskutoimituksia.
+ */
 class Point {
   public Point(float x, float y) {
     this.x = x;
