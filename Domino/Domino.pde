@@ -264,10 +264,10 @@ public void drawFloor(){
   beginShape();
   //vertex(x, y, z, u, v)
   texture(woodenFloor);
-  vertex(-5000, 250, -5000, 0, 0);
-  vertex(5000, 250, -5000, 1024, 0);
-  vertex(5000, 250, 20000, 1024, 1024);
-  vertex(-5000, 250, 20000, 0, 1024);
+  vertex(-4000, 250, -4000, 0, 0);
+  vertex(4000, 250, -4000, 1024, 0);
+  vertex(4000, 250, 4000, 1024, 1024);
+  vertex(-4000, 250, 4000, 0, 1024);
   endShape();
 }
 
@@ -310,4 +310,5 @@ public void drawRoof(){
   vertex(-4000, -3000, 4000);
   endShape();
 }
+
 
