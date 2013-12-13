@@ -18,6 +18,9 @@ Adder adder;
 PImage woodenFloor;
 PImage woodenWall;
 
+//Attribuutti kertoo, onko ohjelma käynnissä vai ei
+boolean running = false;
+
 public void setup() {
   frameRate(20);
   woodenFloor = loadImage("parketti.png");
@@ -139,7 +142,7 @@ public void setup() {
              false,
              adder.BLUE);
 
-            
+           
    //adder.add(new Point(0, 200), 0);
    
 }
@@ -154,6 +157,9 @@ public void draw() {
   drawFloor();
   drawWalls();
   drawRoof();
+  
+  text("Piirtoooo", 0.1,0.1);
+  
   /*//cam.rotateY(frameCount*.01f);
    //cam.lookAt(0,0,500+frameCount*2);
    int mass = 100;
@@ -273,9 +279,9 @@ public void drawFloor(){
 
 public void drawWalls(){
   drawXWall(-4000, 4000, 250, -3000, -4000);
-  /*drawZWall(-4000, 4000, 250, -3000, -4000);
+  drawZWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, 4000);
-  drawXWall(-4000, 4000, 250, -3000, 4000); */
+  drawXWall(-4000, 4000, 250, -3000, 4000); 
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
@@ -321,5 +327,7 @@ public void drawWindow(){
   vertex(-4000, -3000, 4000);
   endShape();
 }
+
+
 
 
