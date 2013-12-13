@@ -31,7 +31,7 @@ public void setup() {
   frameRate(60);
   
   this.minim = new Minim(this) ;
-  this.musicPlayer = minim.loadFile("Everlasting.wav");
+  this.musicPlayer = minim.loadFile("ameno.wav");
   this.musicPlayer.play();
   
   cam = new PeasyCam(this, 1000);
@@ -208,6 +208,7 @@ public void draw() {
     cam.rotateY(-PI/2);
     cam.lookAt(1100, 0, -800, 500, 3000);
   }*/
+  
 }
 
 public void drawLine(Point begin, Point end, Vector3f c){
@@ -268,10 +269,10 @@ public void drawFloor(){
   beginShape();
   //vertex(x, y, z, u, v)
   texture(woodenFloor);
-  vertex(-5000, 250, -5000, 0, 0);
-  vertex(5000, 250, -5000, 1024, 0);
-  vertex(5000, 250, 20000, 1024, 1024);
-  vertex(-5000, 250, 20000, 0, 1024);
+  vertex(-4000, 250, -4000, 0, 0);
+  vertex(4000, 250, -4000, 1024, 0);
+  vertex(4000, 250, 4000, 1024, 1024);
+  vertex(-4000, 250, 4000, 0, 1024);
   endShape();
 }
 
@@ -285,6 +286,7 @@ public void drawWalls(){
   drawXWindow(-500, 500, -1000, -2000, -4000);
   drawXWindow(-500, 500, -1000, -2000, 4000);
   drawXDoor(-3000, -2000, -2000, 250, 4000);
+
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
@@ -320,6 +322,7 @@ public void drawRoof(){
   endShape();
 }
 
+
 public void drawZWindow(int z1, int z2, int y1, int y2, int x){
    beginShape();
   //vertex(x, y, z, u, v)
@@ -351,5 +354,11 @@ public void drawXDoor(int x1, int x2, int y1, int y2, int z){
   vertex(x2, y2, z, 2000, 1000);
   vertex(x1, y2, z, 2000, 0);
   endShape();
+}
+
+
+
+public void reset(){
+  this.setup();
 }
 
