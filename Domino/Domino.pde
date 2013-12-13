@@ -284,7 +284,7 @@ public void drawWalls(){
   drawZWindow(-500, 500, -1000, -2000, 4000);
   drawXWindow(-500, 500, -1000, -2000, -4000);
   drawXWindow(-500, 500, -1000, -2000, 4000);
-  drawXDoor(-3000, -2000, 250, -2000, 4000);
+  drawXDoor(-3000, -2000, -2000, 250, 4000);
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
