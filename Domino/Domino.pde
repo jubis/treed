@@ -17,11 +17,15 @@ BPhysics physics;
 Adder adder;
 PImage woodenFloor;
 PImage woodenWall;
+PImage window;
+PImage door;
 
 public void setup() {
   frameRate(20);
   woodenFloor = loadImage("parketti.png");
   woodenWall = loadImage("seinä.png"); 
+  window = loadImage("ikkuna.png");
+  door= loadImage("ovi.png");
   
   size(1280, 720, P3D);
   frameRate(60);
@@ -275,7 +279,12 @@ public void drawWalls(){
   drawXWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, 4000);
-  drawXWall(-4000, 4000, 250, -3000, 4000); 
+  drawXWall(-4000, 4000, 250, -3000, 4000);
+  drawZWindow(-500, 500, -1000, -2000, -4000); 
+  drawZWindow(-500, 500, -1000, -2000, 4000);
+  drawXWindow(-500, 500, -1000, -2000, -4000);
+  drawXWindow(-500, 500, -1000, -2000, 4000);
+  drawXDoor(-3000, -2000, 250, -2000, 4000);
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
@@ -308,6 +317,39 @@ public void drawRoof(){
   vertex(4000, -3000, -4000);
   vertex(4000, -3000, 4000);
   vertex(-4000, -3000, 4000);
+  endShape();
+}
+
+public void drawZWindow(int z1, int z2, int y1, int y2, int x){
+   beginShape();
+  //vertex(x, y, z, u, v)
+  texture(window);
+  vertex(x, y1, z1, 0, 0);
+  vertex(x, y1, z2, 0, 1000);
+  vertex(x, y2, z2, 1000, 1000);
+  vertex(x, y2, z1, 1000, 0);
+  endShape();
+}
+
+public void drawXWindow(int x1, int x2, int y1, int y2, int z){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(window);
+  vertex(x1, y1, z, 0, 0);
+  vertex(x2, y1, z, 0, 1000);
+  vertex(x2, y2, z, 1000, 1000);
+  vertex(x1, y2, z, 1000, 0);
+  endShape();
+}
+
+public void drawXDoor(int x1, int x2, int y1, int y2, int z){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  texture(door);
+  vertex(x1, y1, z, 0, 0);
+  vertex(x2, y1, z, 0, 1000);
+  vertex(x2, y2, z, 2000, 1000);
+  vertex(x1, y2, z, 2000, 0);
   endShape();
 }
 
