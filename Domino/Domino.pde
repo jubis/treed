@@ -273,9 +273,9 @@ public void drawFloor(){
 
 public void drawWalls(){
   drawXWall(-4000, 4000, 250, -3000, -4000);
-  drawZWall(-4000, 4000, 250, -3000, -4000);
+  /*drawZWall(-4000, 4000, 250, -3000, -4000);
   drawZWall(-4000, 4000, 250, -3000, 4000);
-  drawXWall(-4000, 4000, 250, -3000, 4000); 
+  drawXWall(-4000, 4000, 250, -3000, 4000); */
 }
 
 public void drawXWall(int x1, int x2, int y1, int y2, int z){
@@ -301,6 +301,17 @@ public void drawZWall(int z1, int z2, int y1, int y2, int x){
 }
 
 public void drawRoof(){
+  beginShape();
+  //vertex(x, y, z, u, v)
+  //texture(woodenWall);
+  vertex(-4000, -3000, -4000);
+  vertex(4000, -3000, -4000);
+  vertex(4000, -3000, 4000);
+  vertex(-4000, -3000, 4000);
+  endShape();
+}
+
+public void drawWindow(){
   beginShape();
   //vertex(x, y, z, u, v)
   //texture(woodenWall);
